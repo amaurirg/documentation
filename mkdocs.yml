@@ -1,0 +1,47 @@
+site_name: Documentações em Geral
+
+# nav:
+#   - Doc: doc.md
+#   - Home: index.md
+#   - Diagramas: diagramas.md
+#   - Types: types.md
+#   - ColdDB: colddb.md
+#   - Upload File:
+#       - File: upload_file/file.md
+#       - Webservice: upload_file/webservice.md
+
+markdown_extensions:
+  - meta
+  - def_list
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.smartsymbols
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.betterem:
+      smart_enable: all
+theme:
+  language: pt
+  features:
+    - navigation.instant
+    - navigation.top
+    - toc.integrate
+  favicon: img/favicon.svg
+  name: material
+  palette:
+      primary: black
+      accent: indigo
+  font:
+    text: Ubuntu
+    code: Ubuntu Mono 
+
+hide:
+  - navigation # Hide navigation
+  - toc        # Hide table of contents
+
+extra_css:
+  - css/extra_css.css
