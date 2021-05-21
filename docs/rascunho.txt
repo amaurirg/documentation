@@ -1,0 +1,131 @@
+Instalar git:
+sudo apt-get install git-all
+
+============
+
+GitFlow
+Tutorial:
+https://danielkummer.github.io/git-flow-cheatsheet/index.pt_BR.html
+Instalar:
+apt-get install git-flow
+Inicializar:
+git flow init
+Comece o desenvolvimento de uma nova funcionalidade:
+git flow feature start MYFEATURE
+Esse comando cria um novo branch da funcionalidade baseado no 'develop' e alterna para ele
+
+
+
+============
+
+Instalar Insomnia:
+https://insomnia.rest/download
+Fazer download e instalar
+
+============
+
+Criando chaves ssh:
+Verificando se existe:
+ls -al ~/.ssh
+ssh-keygen -t ed25519 -C "your_email@example.com"
+Quando aparecer a solicitação "Enter a file in which to save the key" (Insira um arquivo no qual salvar a chave), presssione Enter. O local padrão do arquivo será aceito.
+> Enter a file in which to save the key (/home/you/.ssh/id_ed25519): [Press enter]
+Digite uma frase secreta segura no prompt. For more information, see "Working with SSH key passphrases."
+> Enter passphrase (empty for no passphrase): [Type a passphrase]
+> Enter same passphrase again: [Type passphrase again]
+Adicionar sua chave SSH ao ssh-agent
+Inicie o ssh-agent em segundo plano.
+$ eval "$(ssh-agent -s)"
+> Agent pid 59566
+In some Linux environments, you need root access to run the command:
+
+$ sudo -s -H
+$ eval "$(ssh-agent -s)"
+> Agent pid 59566
+Adicione sua chave SSH privada ao ssh-agent. 
+$ ssh-add ~/.ssh/id_ed25519
+Adicionar chave ssh ao Github:
+Ver sua chave pública:
+cat ~/.ssh/id_ed25519.pub
+Copie a chave pública SSH e cole no Github (SSH and GPG keys => New SSH key).
+
+==================
+
+Instalar curl:
+sudo apt-get install curl
+
+==================
+
+Terminal mais produtivo:
+Começando
+1°) ZSH
+apt install zsh
+2°) Oh My Zsh
+curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh; zsh
+Se não aparecer a mensagem “Shell changed.” logo antes da logo como na tela acima, pode ser que o script não tenha conseguido alterar seu shell ou talvez tivesse um erro na senha; nesse caso, basta você mesmo alterá-lo:
+sudo usermod --shell $(which zsh) $USER
+Ok, agora você já tem um autocomplete absurdo! Experimente digitar git <comando> (ou algum outra coisa que você costuma usar no dia-a-dia) e apertar <TAB> duas vezes para ver a lista de opções disponíveis
+Para habilitar um plugin (tanto os desse link acima quanto os que veremos mais abaixo), basta adicionar o nome dele na linha “plugins” do arquivo “.zshrc” que foi criado em sua pasta pessoal (“~/.zshrc”).
+
+vamos partir para duas vertentes: a parte funcional e a parte visual.
+
+Funcional — vamos colocar (muito) mais recursos nele!
+1°) zsh-syntax-highlighting: basicamente vai deixar o comando verde se tiver sido digitado corretamente, ou do contrário, vermelho. E ao digitar um caminho, ele ficará sublinhado caso o arquivo/diretório existir.
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+Daí adicione zsh-syntax-highlighting na lista de plugins do seu “~/.zshrc”
+2°) zsh-autosuggestions: vai sugerir comandos baseados no seu histórico.
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+Daí adicione zsh-autosuggestions na lista de plugins do seu “~/.zshrc”
+3°) fzf: um fuzzy finder (buscador de arquivos) direto no terminal!!
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+Lembre-se de responder “y” para as questões que serão feitas!
+Pronto, agora você poderá usar Ctrl+T quando precisar procurar por arquivos, que nem você faria no seu editor
+Você poderá procurar comandos no histórico também, com Ctrl+R
+4º) Notificações: habilitando o plugin “bgnotify” (que já vem com o Oh My Zsh), quaisquer comandos que sejam concluídos enquanto o terminal não estiver focado irão emitir uma notificação no desktop. Basta adicionar bgnotify à sua lista de plug-ins em seu .zshrc
+
+Visual — Um terminal mais bonito
+1°) Nerd Fonts (https://www.nerdfonts.com/font-downloads): um “agregador de fontes icônicas”, com algumas fontes monoespaçadas alteradas para suportar ícones! Vá na sessão Downloads(https://nerdfonts.com/#downloads) e baixe a variante da fonte que você gostar mais (pessoalmente gosto muito da Hack() para usar no terminal, até porque ela foi feita pra isso).
+Agora basta extrair o conteúdo dessa pasta em ~/.fonts:
+mkdir ~/.fonts && cd ~/.fonts
+unzip ~/Downloads/<fonte_que_voce_escolheu>.zip
+E então escolha-a nas configurações de seu terminal (isso costuma variar, mas geralmente algo como Preferências->Aparência->Fonte)
+Isso irá permitir a exibição de ícones em seu terminal!!
+2°) Powerlevel9k: um tema que se integra lindamente ao git, suporta os ícones instalados no passo anterior e vai poupar alguns comandos repetitivos como o clássico git status
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+Daí troque o ZSH_THEME no seu “~/.zshrc” para powerlevel9k/powerlevel9k para habilitá-lo como tema e adicione POWERLEVEL9K_MODE="nerdfont-complete" para habilitar os ícones
+Feche e reabra o terminal e voi lá!
+
+Isso é absurdamente personalizável! Dá pra colocar pra exibir até versões de langs em seu sistema, quantidade de ram usada, load average, code coverage e muuuito mais! Todas as opções disponíveis (e são muitas) podem ser encontradas aqui -> https://github.com/bhilburn/powerlevel9k#prompt-customization
+Basta adicionar POWERLEVEL9K_LEFT_PROMPT_ELEMENTS = (...elements) e POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS = (...elements) no seu “~/.zshrc” logo após o POWERLEVEL9K_MODE.
+E reabrir o terminal, daí pronto! Terá o terminal como você tiver configurado
+Ah, e conforme você fizer ações num projeto, ele vai alterando as cores e os ícones pra você saber quando tiver algum arquivo modificado, deletado, adicionado, um stash, commits para baixar, commits para enviar, em qual server está seu origin, em qual branch você está..
+
+===============
+
+Instalando o pyenv
+Instalando dependências necessárias:
+sudo apt install libedit-dev
+sudo apt-get install libssl-dev
+O próprio repositório do projeto possui instruções de instalação via Git, porém eles criaram um instalador automático para que não precisemos nos preocupar com todos os comandos.
+Basta executar o seguinte comando no seu terminal:
+curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | zsh
+Aguarde a instalação e então será necessário colocar o seguinte trecho de código no seu .bashrc ou .zshrc:
+export PATH=”~/.pyenv/bin:$PATH”
+eval “$(pyenv init -)”
+eval “$(pyenv virtualenv-init -)”
+Para isso podemos rodar um vim ~/.bashrc ou vim ~/.zshrc e adicionar o conteúdo acima nas últimas linhas do arquivo.
+Para recarregar as configurações, rodamos source ~/.bashrc ou source ~/.zshrc em nosso terminal.
+Agora o pyenv deve funcionar se rodarmos o comando pyenv --version, por exemplo.
+Instalar a versão 3.6.4:
+pyenv install 3.6.4
+Listar as versões instaladas no sistema operacional:
+pyenv versions
+Escolher a versão a utilizar no projeto:
+pyenv local 3.6.4
+Saber qual versão do projeto:
+python --version
+Desinstalando versões do Python via pyenv
+Além de mostrar as versões disponíveis, o pyenv também mostra qual é a versão que está rodando localmente selecionado com um asterisco (*).
+Removendo uma versão
+pyenv uninstall 3.6.4
+
