@@ -104,22 +104,31 @@ Ah, e conforme você fizer ações num projeto, ele vai alterando as cores e os 
 
 Instalando o pyenv
 Instalando dependências necessárias:
-sudo apt install libedit-dev
-sudo apt-get install libssl-dev
+sudo apt-get update
+sudo apt-get install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libedit-dev libssl-dev
 O próprio repositório do projeto possui instruções de instalação via Git, porém eles criaram um instalador automático para que não precisemos nos preocupar com todos os comandos.
 Basta executar o seguinte comando no seu terminal:
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | zsh
-Aguarde a instalação e então será necessário colocar o seguinte trecho de código no seu .bashrc ou .zshrc:
-export PATH=”~/.pyenv/bin:$PATH”
-eval “$(pyenv init -)”
-eval “$(pyenv virtualenv-init -)”
-Para isso podemos rodar um vim ~/.bashrc ou vim ~/.zshrc e adicionar o conteúdo acima nas últimas linhas do arquivo.
-Para recarregar as configurações, rodamos source ~/.bashrc ou source ~/.zshrc em nosso terminal.
-Agora o pyenv deve funcionar se rodarmos o comando pyenv --version, por exemplo.
-Instalar a versão 3.6.4:
-pyenv install 3.6.4
+
+Após a instalação, adicione esse trecho em ~/.profile e em ~/.zprofile:
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+E em ~/.zshrc:
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+Verificar se foi instalado:
+pyenv --version
 Listar as versões instaladas no sistema operacional:
 pyenv versions
+Listar versões para instalação:
+pyenv install -l
+Instalar a versão 3.6.4:
+pyenv install 3.6.4
+Criar um ambiente virtual:
+pyenv virtualenv <versão_python> <nome_para_virtualenv>
 Escolher a versão a utilizar no projeto:
 pyenv local 3.6.4
 Saber qual versão do projeto:
