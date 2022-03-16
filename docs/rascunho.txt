@@ -138,3 +138,13 @@ Além de mostrar as versões disponíveis, o pyenv também mostra qual é a vers
 Removendo uma versão
 pyenv uninstall 3.6.4
 
+
+Instalando Java
+===============
+https://react-native.rocketseat.dev/android/linux
+Se você já tiver o JDK instalado em sua máquina, certifique-se que sua versão seja a 8 ou mais recente.
+Instalar a JDK (Java Development Kit) na versão 11 (LTS mais recente) com o seguinte comando:
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update
+sudo apt-get install openjdk-11-jdk
+java -version
